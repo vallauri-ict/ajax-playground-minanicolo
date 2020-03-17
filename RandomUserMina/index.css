@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Open Sans", "Arial", "Verdana", sans-serif;
+}
+body{
+    background-color: #2c2e36;
+    font-family: Ubuntu,sans-serif;
+    transition: all .25s ease-in-out;
+    position: relative;
+    left: 0;
+}
+/*SECTION 1*/
+#divImg{
+    border-radius: 50%;
+    border: 1px solid grey;
+    width: 145px;
+    height: 140px;
+    padding: 0px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#img{
+    border-radius: 50%;
+    border: 0;
+    margin-top: 5px;
+    width: 135px;
+    height: 130px;
+}
+
+#divUtente{
+    padding: 0px;
+    margin: 0 auto;
+    text-align: center;
+}
+#frase{
+    height: 21px;
+    color: #666;
+    font-size: 18px;
+}
+#info{
+    font-size: 15pt;
+    font-weight: bold;
+    color: #2c2e31;
+}
+
+#divRandomUser{
+    text-align: center;
+    border: 1px solid black;
+    padding: 10px;
+    width: 500px;
+    height: 300px;
+    background-color: white;
+    margin: -180px auto;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+#divGenere{
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+#divNazione{
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#divGenere tr td{
+    padding:5px;
+}
+#divNazione tr th p{
+    text-align: center;
+}
+
+#divNazione tr td{
+    padding: 5px;
+}
+
+#divNav{
+    padding: 0px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: white;
+    width: 100%;
+    height: 100px;
+    position: relative;
+    list-style-type: none;
+}
+
+#divNav li{
+    display: inline-block;
+    margin: 20px;
+    width: 40px;
+    height: 48px;
+    background-image: url("card_icons.png");
+    transition: all .25s ease-out;
+    background-size: 378px;
+    background-position-y: -48px;
+}
+#profilo{
+    background-position-x: 0;
+}
+#email{
+    background-position-x: -68px;
+}
+#birthday{
+    background-position-x: -135px;
+}
+#map{
+    background-position-x: -203px;
+}
+#phone{
+    background-position-x: -270px;
+}
+#password{
+    background-position-x: -338px;
+}
+
+#frecciaSX{
+    float: left;
+    margin-left: 0;
+    margin-top: 20px;
+    position: relative;
+    bottom: 50px;
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    border-right: 25px solid #000;
+}
+#frecciaDX{
+    float: right;
+    margin-right: 0px;
+    margin-top: 20px;
+    position: relative;
+    bottom: 50px;
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    border-left: 25px solid #000;
+}
+
+section#sectUtente {
+    margin-left:auto;
+    margin-right:auto;
+	margin-top:60px;
+    background-color: white;
+    height: 370px;
+    width:800px;
+    top:40px;
+}
+#progrBar{
+    margin-top: 58px;
+	height: 4px;
+	width:100px;
+    background-color: #4CAF50;
+}
+/*********************************************************************/
+
+/*SECTION PARAMETRI*/
+section#sectParam {
+    background-color: #2c2e36;
+    height: 500px;
+    width: 100%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:40px;
+}
+#sectParam h3{
+    color: white;
+}
+section#sectParam > *{
+    background-color: inherit;
+}
+h1{
+    text-align: center;
+    font-size: 48px;
+    text-align: center;
+    color: white;
+    font-weight: 100;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+#divParametri{
+    width: 500px;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-row-gap: 10px;
+    padding: 10px;
+    margin: 40px auto;
+    color: white;
+}
+#nPersone {
+    margin: 0 auto;
+}
+#lb{
+    margin-left: 60px;
+}
+#nPersone div input,span{
+    display: inline-block;
+}
+#rangeRisultati {
+    width: 240px;
+    height: 5px;
+    background-color: white;
+    cursor: pointer;
+    margin: 0 auto;
+}
+#nProfile{
+    text-align: center;
+}
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+#nCorrente{
+    color: white;
+}
+#sectParam label{
+    color: white;
+}
+#nPersone div span{
+    text-align: center;
+    width: 40px;
+    margin-left: 10px;
+}
+table *{
+    color: white;
+}
+table thead tr th h3{
+    text-align: center;
+}
+
+#btnGenera{
+    display: block;
+    margin: 50px auto;
+    width: 200px;
+    height: 40px;
+    font-weight: bold;
+    background-color: #2c2e31;
+    border: 2px solid white;
+    border-radius: 10px;
+    font-size: 16pt;
+    color: white;
+}
+/******************************************/
+
+/*RANGE BAR*/
+input[type=range]{
+    -webkit-appearance: none;
+    margin:0 auto;
+}
+input[type=range]:focus {
+    outline: none;
+}

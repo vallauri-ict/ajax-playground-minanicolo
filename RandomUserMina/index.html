@@ -1,0 +1,76 @@
+﻿<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html" />
+    <link rel="stylesheet" href="index.css" />
+    <!-- JQUERY -->
+    <script type="text/javascript" src="jQuery.js">  </script>
+    <script type="text/javascript" src="index.js">  </script>
+    <title>Random User Generator</title>
+</head>
+    <body>
+        <h1>Random User Generator</h1>
+        <section id="sectUtente">
+            <div id="divImg"><img id="img" /></div>
+            <div id="divUtente">
+                <p id="frase"></p>
+                <p id="info"></p>
+            </div>
+
+            <ul id="divNav">
+                <li id="profilo" onmouseover="profile()" ></li>
+                <li id="email" onmouseover="email()" ></li>
+                <li id="birthday" onmouseover="birthday()" ></li>
+                <li id="map" onmouseover="map()" ></li>
+                <li id="phone" onmouseover="phone()"></li>
+                <li id="password" onmouseover="password()"></li>
+            </ul>
+
+            <div id="nProfile">Profile 1 of 1</div>
+            <img id="frecciaSX" onclick="frecciaSX()">
+            <img id="frecciaDX" onclick="frecciaDX()">
+			<div id="progrBar"></div>
+        </section>
+
+        <section id="sectParam">
+            <input type="button" id="btnGenera" value="Genera" />
+            <div id="divParametri">
+                <div id="nPersone">
+                    <label id="lb">Numero profili: <span id="nCorrente">1</span><br><br></label>
+                    <input class="slider" type="range" id="rangeRisultati" min="1" max="25" value="1" step="1" />
+                </div>
+                <table id="divGenere">
+                    <thead>
+                    <tr>
+                        <th colspan="3"><h3>Genere</h3></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><label><input type="radio" id="radio-all" name="radioGenere" checked /> All</label></td>
+                        <td><label><input type="radio" id="radio-female" name="radioGenere" /> Only Women</label></td>
+                        <td><label><input type="radio" id="radio-male" name="radioGenere" /> Only Men</label></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table id="divNazione">
+                    <thead>
+                    <tr>
+                        <th colspan="5"><h3>Nazionalità</h3></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><label><input type="checkbox" id="chk-US" name="chkNazione" /> American</label></td>
+                        <td><label><input type="checkbox" id="chk-GB" name="chkNazione" /> English</label></td>
+                        <td><label><input type="checkbox" id="chk-DE" name="chkNazione" /> German</label></td>
+                        <td><label><input type="checkbox" id="chk-BR" name="chkNazione" /> Brazilian</label></td>
+                        <td><label><input type="checkbox" id="chk-IR" name="chkNazione" /> Iranian</label></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </body>
+</html>
+ 
