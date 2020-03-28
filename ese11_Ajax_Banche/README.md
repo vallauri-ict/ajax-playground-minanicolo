@@ -12,3 +12,6 @@ precedentemente selezionata. Una volta che le due combobox sono state selezionat
 * CONTI (cConto, cCorrentista, cFiliale, Saldo)
 * MOVIMENTI (cMov, cConto, cOperazione, Data, Importo) 
 * OPERAZIONI (cOperazione, Descrizione)
+
+### Funzione importante ###
+function inviaRichiesta(method, url, parameters=""){}
