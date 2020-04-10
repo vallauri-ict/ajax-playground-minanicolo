@@ -3,5 +3,5 @@
 ## Cosa contiene? ##
 > Questo repository contiene i seguenti esercizi:
 > * Random User
-> * es11_Ajax
+> * es11_Ajax_Banche
 > * es12_Finance
