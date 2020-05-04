@@ -1,6 +1,6 @@
 # Project created by Mina Nicolò 4B Inf #
 ## Alpha Vantage -- Finance ##
-> Questo progetto è basato su ajax, utilizza delle chiamate API per ottenere dei dati.
+> Questo progetto è basato su ajax, utilizza delle chiamate API per ottenere dei dati dal sito Alpha Vantage.
 
 
 ### Funzioni più importanti ###
