@@ -4,9 +4,9 @@ const apiKey="44FIKZA1TRY5GHVQ";
 $(document).ready(function () {
     let _cmbSymbols=$("#cmbSymbols");
     let _table=$("#tableData tbody");
-    _cmbSymbols.prop("selectedIndex","-1");
+    _cmbSymbols.prop("selectedIndex","0");
 
-	let _chartTypeCmb=$("#chartStyleList");
+	let _chartTypeCmb=$("#chartStyleList").prop("selectedIndex","0");
     let ctx;
 
 	//RICERCA TRAMITE COMBOBOX
@@ -34,7 +34,7 @@ $(document).ready(function () {
 		});
 	});
 
-    //Download Chart Image
+    //DOWNLOAD CHART IMAGE
     $("#download").on('click', function(){
         /*Get image of canvas element*/
         var url_base64jp = document.getElementById("myChart").toDataURL("image/png");
@@ -107,8 +107,9 @@ function chartMod(chart, content)
     {
         dataChart["labels"].push(key);
         dataset["data"].push(content[key].replace("%", ""));
-        dataset["borderColor"].push("rgb(25, 52, 255)");
-        dataset["backgroundColor"].push("rgb(25, 52, 255)");
+        let color = "rgba(" + Random(0, 255) + ", " + Random(0, 255) + ", " + Random(0, 255) + ", 1)";
+        dataset["backgroundColor"].push(color);
+        dataset["borderColor"].push(color);
     }
     chart.update();
 }
@@ -125,3 +126,6 @@ function InviaRichiesta(method, url, parameters = "",async=true)
         async:async
     });
 }
+
+function Random(min, max) {
+    return Math.floor((max - min + 1) * Math.random()) + min; }

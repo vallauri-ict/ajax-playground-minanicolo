@@ -2,24 +2,27 @@
 
 <head>
     <title>Get Stock Quotes</title>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="index.js" type="application/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-	<!-- link a chart -->
-	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <link rel="icon" href="#">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="index.js"></script>
 </head>
 
 <body>
-    <nav style="background-color: #AAA;" class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header" style="margin-top: 7px; margin-left:10%;">
-                <select class="form-control" id="cmbSymbols" style="width: 210px;">
+<div style="font-size: 50pt; color: red; text-align: center">ALPHA VANTAGE</div>
+
+        <!--        NAVBAR      -->
+<section class="section">
+    <div class="col-sm-12 row justify-content-center" style="margin-bottom: 10px;">
+        <div class="col-sm-4">
+            <div class="text-center simple-text">
+                <span style="font-size: 15pt">Select a brand</span>
+            </div>
+            <div class="input-group ">
+                <select class="form-control" id="cmbSymbols">
                     <option value="MSFT">Microsoft</option>
                     <option value="SNE">Sony</option>
                     <option value="BABA">Alibaba</option>
@@ -27,77 +30,106 @@
                     <option value="XIACF">Xiaomi</option>
                 </select>
             </div>
-			
-			<div class="navbar-header" style="margin-top: 7px;margin-left:10%;">
-				<select select class="form-control" id="chartStyleList" style="width: 210px;">
-					<option value="null"> -- Seleziona -- </option>
-					<option>Rank A: Real-Time Performance</option>
-					<option>Rank B: 1 Day Performance</option>
-					<option>Rank C: 5 Day Performance</option>
-					<option>Rank D: 1 Month Performance</option>
-					<option>Rank E: 3 Month Performance</option>
-					<option>Rank F: Year-to-Date (YTD) Performance</option>
-					<option>Rank G: 1 Year Performance</option>
-					<option>Rank H: 3 Year Performance</option>
-					<option>Rank I: 5 Year Performance</option>
-					<option>Rank J: 10 Year Performance</option>
-				</select>
-			</div>
-		
-            <ul class="nav navbar-nav" style="margin-top: 7px;margin-left:10%;">
-                <li><form class="form-inline">
-                        <input class="form-control mr-sm-2" id="textSearched" type="text" placeholder="Search...">
-                    </form>
-                </li>
-            </ul>
         </div>
-    </nav>
+        <div class="col-sm-4">
+            <div class="text-center simple-text">
+                <span style="font-size: 15pt">Search</span>
+            </div>
+            <div class="input-group" style="margin-bottom: 20px">
+                <input type="text" class="form-control" placeholder="Search..." id="textSearched">
+            </div>
+        </div>
 
-    <div id="wrapper">
-        <div id="quote">
-            <table cellspacing="0" cellpadding="3" id="tableData">
-                <thead>
-                    <tr>
-                        <th>Symbol</th>
-                        <th>Last Trade</th>
-                        <th>Last Trade Time</th>
-                        <th>Change</th>
-                        <th>Open</th>
-                        <th>Previous Close</th>
-                        <th>Day's Low</th>
-                        <th>Day's High</th>
-                        <th>Volume</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td id="symbol"></td>
-                        <td id="lastTrade"></td>
-                        <td id="lastTradeTime"></td>
-                        <td id="change"></td>
-                        <td id="open"></td>
-                        <td id="previousClose"></td>
-                        <td id="daysLow"></td>
-                        <td id="daysHigh"></td>
-                        <td id="volume"></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="col-sm-4">
+            <div class="text-center simple-text">
+                <span style="font-size: 15pt">Select a sector</span>
+            </div>
+            <div class="input-group ">
+                <select select class="form-control" id="chartStyleList" style="margin-bottom: 20px">
+                    <option>Rank A: Real-Time Performance</option>
+                    <option>Rank B: 1 Day Performance</option>
+                    <option>Rank C: 5 Day Performance</option>
+                    <option>Rank D: 1 Month Performance</option>
+                    <option>Rank E: 3 Month Performance</option>
+                    <option>Rank F: Year-to-Date (YTD) Performance</option>
+                    <option>Rank G: 1 Year Performance</option>
+                    <option>Rank H: 3 Year Performance</option>
+                    <option>Rank I: 5 Year Performance</option>
+                    <option>Rank J: 10 Year Performance</option>
+                </select>
+            </div>
         </div>
-		
+    </div>
+</section>
+
+            <!--        TABLE       -->
+    <table class="table table-dark" id="tableData">
+        <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Last Trade</th>
+            <th>Last Trade Time</th>
+            <th>Change</th>
+            <th>Open</th>
+            <th>Previous Close</th>
+            <th>Day's Low</th>
+            <th>Day's High</th>
+            <th>Volume</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td id="symbol"></td>
+            <td id="lastTrade"></td>
+            <td id="lastTradeTime"></td>
+            <td id="change"></td>
+            <td id="open"></td>
+            <td id="previousClose"></td>
+            <td id="daysLow"></td>
+            <td id="daysHigh"></td>
+            <td id="volume"></td>
+        </tr>
+        </tbody>
+    </table>
+
+	<br><br><br><br><br><br>
 					<!-- GRAFICO -->
-		<div class="container" style="width:600px;">
-			<canvas id="myChart"></canvas>
-		</div>
-        <a id="download"
-           download="ChartImage.png"
-           href=""
-           class="btn btn-primary float-right bg-flat-color-1"
-           title="Descargar Gráfico">
-            SCARICA GRAFICO
-            <!-- Download Icon -->
-            <i class="fa fa-download"></i>
-        </a>
+    <div style="font-size: 25pt; color: #666; text-align: center">CHART</div>
+            <div class="container" style="width:600px;">
+                <canvas id="myChart"></canvas>
+            </div>
+
+                    <!-- BUTTONS -->
+        <div class="col-sm-12 row justify-content-center">
+            <div class="col-sm-4" style="margin-bottom: 30px; margin-top: 15px">
+                <div class="text-center simple-text">
+                    <span>Download chart</span>
+                </div>
+                <a id="download"
+                   download="ChartImage.png"
+                   href=""
+                   class="btn btn-secondary bg-flat-color-1 col-sm-12"
+                   title="Download chart">
+                    DOWNLOAD CHART
+                    <!-- Download Icon -->
+                    <i class="fa fa-download"></i>
+                </a>
+            </div>
+
+            <div class="col-sm-4" style="margin-bottom: 30px; margin-top: 15px">
+                <div class="text-center simple-text">
+                    <span>Upload a file on Google Drive</span>
+                </div>
+                <a id="upload"
+                   href=""
+                   class="btn btn-secondary bg-flat-color-1 col-sm-12"
+                   title="Upload file">
+                    UPLOAD FILE
+                    <!-- Download Icon -->
+                    <i class="fa fa-upload"></i>
+                </a>
+            </div>
+        </div>
     </div>
 </body>
 
