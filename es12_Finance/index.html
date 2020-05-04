@@ -120,14 +120,10 @@
                 <div class="text-center simple-text">
                     <span>Upload a file on Google Drive</span>
                 </div>
-                <a id="upload"
-                   href=""
-                   class="btn btn-secondary bg-flat-color-1 col-sm-12"
-                   title="Upload file">
-                    UPLOAD FILE
-                    <!-- Download Icon -->
-                    <i class="fa fa-upload"></i>
-                </a>
+                <form id="myForm">
+                    <input type="submit" class="btn btn-secondary bg-flat-color-1 col-sm-12" value="Upload File" id="upload">
+                    <input type="file"  style="margin-top: 10px" name="myFile" id="myFile">
+                </form>
             </div>
         </div>
     </div>

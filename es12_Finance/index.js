@@ -43,7 +43,9 @@ $(document).ready(function () {
         /*insert chart image url to download button (tag: <a></a>) */
         a.href = url_base64jp;
     });
-});
+
+    //UPLOAD A FILE
+    // ----
 
 function getGlobalQuotes(symbol,i) {
     let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey="+apiKey;
@@ -113,6 +115,7 @@ function chartMod(chart, content)
     }
     chart.update();
 }
+
 
 function InviaRichiesta(method, url, parameters = "",async=true)
 {
