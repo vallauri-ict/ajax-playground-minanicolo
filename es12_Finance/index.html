@@ -122,7 +122,11 @@
                 </div>
                 <form id="myForm">
                     <input type="submit" class="btn btn-secondary bg-flat-color-1 col-sm-12" value="Upload File" id="upload">
-                    <input type="file"  style="margin-top: 10px" name="myFile" id="myFile">
+                    <input type="file"  style="margin-top: 10px" name="files[]" multiple id="files">
+                    <div id="progress-wrp">
+                        <div class="progress-bar"></div>
+                        <div class="status">0%</div>
+                    </div>
                 </form>
             </div>
         </div>

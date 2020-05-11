@@ -1,51 +1,57 @@
 "use strict";
 const apiKey="44FIKZA1TRY5GHVQ";
 
-$(document).ready(function () {
-    let _cmbSymbols=$("#cmbSymbols");
-    let _table=$("#tableData tbody");
-    _cmbSymbols.prop("selectedIndex","0");
+let clientID = "615669052983-cqg11slnm57ufgo2s3r8bpfpctr5j7rf.apps.googleusercontent.com";
+const redirectUri = "http://127.0.0.1:8080/index.html";
+const clientSecret = "GWEegfM8Idkb3xe_a1rAZotg";
+const pointTO = "https://www.googleapis.com/auth/drive";
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
 
-	let _chartTypeCmb=$("#chartStyleList").prop("selectedIndex","0");
+$(document).ready(function () {
+    let _cmbSymbols = $("#cmbSymbols");
+    let _table = $("#tableData tbody");
+    _cmbSymbols.prop("selectedIndex", "0");
+
+    let _chartTypeCmb = $("#chartStyleList").prop("selectedIndex", "0");
     let ctx;
 
-	//RICERCA TRAMITE COMBOBOX
-    _cmbSymbols.on("change",function () {
+    //RICERCA TRAMITE COMBOBOX
+    _cmbSymbols.on("change", function () {
         _table.html("");
-       _table.append(createRows(0));
-        getGlobalQuotes($(this).val(),0);
+        _table.append(createRows(0));
+        getGlobalQuotes($(this).val(), 0);
     });
 
-	//RICERCA INCREMENTALE
-    $("#textSearched").on("keyup",function () {
-        if($("#textSearched").val().length>=2) {
+    //RICERCA INCREMENTALE
+    $("#textSearched").on("keyup", function () {
+        if ($("#textSearched").val().length >= 2) {
             _table.html("");
             getSymbolSearched($(this).val(), _table);
         }
     })
-	
-	//CHART
-	_chartTypeCmb.on("change",function(){
-		let ds=InviaRichiesta("GET","http://localhost:3000/SECTOR");
-		ds.done(function (data) {
-		if(!ctx)
-			ctx=chartCreation("http://localhost:3000/chart");
-		chartMod(ctx, data[_chartTypeCmb.val()]);
-		});
-	});
+
+    //CHART
+    _chartTypeCmb.on("change", function () {
+        let ds = InviaRichiesta("GET", "http://localhost:3000/SECTOR");
+        ds.done(function (data) {
+            if (!ctx)
+                ctx = chartCreation("http://localhost:3000/chart");
+            chartMod(ctx, data[_chartTypeCmb.val()]);
+        });
+    });
 
     //DOWNLOAD CHART IMAGE
-    $("#download").on('click', function(){
+    $("#download").on('click', function () {
         /*Get image of canvas element*/
         var url_base64jp = document.getElementById("myChart").toDataURL("image/png");
         /*get download button (tag: <a></a>) */
-        var a =  document.getElementById("download");
+        var a = document.getElementById("download");
         /*insert chart image url to download button (tag: <a></a>) */
         a.href = url_base64jp;
     });
 
-    //UPLOAD A FILE
-    // ----
+});
 
 function getGlobalQuotes(symbol,i) {
     let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey="+apiKey;
@@ -132,3 +138,110 @@ function InviaRichiesta(method, url, parameters = "",async=true)
 
 function Random(min, max) {
     return Math.floor((max - min + 1) * Math.random()) + min; }
+
+$.ajax({
+    type: 'POST',
+    url: "https://www.googleapis.com/oauth2/v4/token",
+    data: {
+        code:code,
+        redirect_uri:redirectUri,
+        client_secret:clientSecret,
+        client_id:clientID,
+        scope:pointTO,
+        grant_type:"authorization_code"
+    },
+    dataType: "json",
+    success: function(resultData)
+    {
+        localStorage.setItem("accessToken",resultData.access_token);
+        localStorage.setItem("refreshToken",resultData.refreshToken);
+        localStorage.setItem("expires_in",resultData.expires_in);
+        window.history.pushState({}, document.title, "/GitLoginApp/" + "login.html");
+    }
+});
+
+function stripQueryStringAndHashFromPath(URL)
+{
+    return URL.split("?")[0].split("#")[0];
+}
+
+let Upload = function (file)
+{
+    this.file = file;
+};
+
+Upload.prototype.getType = function()
+{
+    localStorage.setItem("type",this.file.type);
+    return this.file.type;
+};
+Upload.prototype.getSize = function()
+{
+    localStorage.setItem("size",this.file.size);
+    return this.file.size;
+};
+Upload.prototype.getName = function()
+{
+    return this.file.name;
+};
+
+Upload.prototype.doUpload = function ()
+{
+    let that = this;
+    let formData = new FormData();
+
+    formData.append("file", this.file, this.getName());
+    formData.append("upload_file", true);
+
+    $.ajax({
+        type: "POST",
+        beforeSend: function(request) {
+            request.setRequestHeader("Authorization", "Bearer" + " " + localStorage.getItem("accessToken"));
+
+        },
+        url: "https://www.googleapis.com/upload/drive/v2/files",
+        data:{
+            uploadType:"media"},
+
+        xhr: function () {
+            let myXhr = $.ajaxSettings.xhr();
+            if (myXhr.upload) {
+                myXhr.upload.addEventListener('progress', that.progressHandling, false);
+            }
+            return myXhr;
+        },
+        success: function (data) {
+            console.log(data);
+            window.location.href="http://127.0.0.1:8080";
+        },
+        error: function (error) {
+            console.log(error);
+        },
+        async: true,
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        timeout: 60000
+    });
+};
+
+Upload.prototype.progressHandling = function (event)
+{
+    let percent = 0;
+    let position = event.loaded || event.position;
+    let total = event.total;
+    let progress_bar_id = "#progress-wrp";
+    if (event.lengthComputable)
+        percent = Math.ceil(position / total * 100);
+
+    $(progress_bar_id + " .progress-bar").css("width", +percent + "%");
+    $(progress_bar_id + " .status").text(percent + "%");
+};
+
+$("#upload").on("click", function (e)
+{
+    let file = $("#files")[0].files[0];
+    let upload = new Upload(file);
+    upload.doUpload();
+});
