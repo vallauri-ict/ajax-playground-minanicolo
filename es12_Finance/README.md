@@ -8,10 +8,10 @@ Questo progetto è basato su ajax, utilizza delle chiamate API per ottenere dei 
 * Selzionare un settore dalla combobox, successivamente verrà creato un grafico con i dati relativi al settore scelto;
 * Effettuare una ricerca sequenziale digitando il simbolo dell'azienda che si vuole visualizzare;
 * Scaricare il grafico precedentemente creato;
-* Caricare il grafico creato e scaricato su Google Drive;
+* Caricare il grafico, creato e scaricato, su Google Drive;
 >
 
-Per scaricare e caricare successivamente il grafico su Google Drive è necessario registrarsi!!
+Per caricare il grafico su Google Drive è necessario registrarsi!!
 
 ### Funzioni più importanti ###
 ```javascript
