@@ -4,7 +4,7 @@ Questo progetto è basato su ajax, utilizza delle chiamate API per ottenere dei 
 
 ## Cosa è possibile fare? ##
 >
-* Selezionare un brand dalla combo box;
+* Selezionare un brand dalla combobox;
 * Selzionare un settore dalla combobox, successivamente verrà creato un grafico con i dati relativi al settore scelto;
 * Effettuare una ricerca sequenziale digitando il simbolo dell'azienda che si vuole visualizzare;
 * Scaricare il grafico precedentemente creato;
