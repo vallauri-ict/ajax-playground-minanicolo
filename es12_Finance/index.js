@@ -1,20 +1,25 @@
 "use strict";
 const apiKey="44FIKZA1TRY5GHVQ";
 
-let clientID = "615669052983-cqg11slnm57ufgo2s3r8bpfpctr5j7rf.apps.googleusercontent.com";
-const redirectUri = "http://127.0.0.1:8080/index.html";
-const clientSecret = "GWEegfM8Idkb3xe_a1rAZotg";
-const pointTO = "https://www.googleapis.com/auth/drive";
-const urlParams = new URLSearchParams(window.location.search);
-const code = urlParams.get('code');
-
 $(document).ready(function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    const redirect_uri = "http://127.0.0.1:8080/index.html"; // replace with your redirect_uri;
+    const client_secret = "1mxPnqrS06vDZ2dzGx1wMfvW"; // replace with your client secret
+    const scope = "https://www.googleapis.com/auth/drive";
+    let access_token= "https://oauth2.googleapis.com/token";
+    let client_id = "615669052983-6nc3ff9he6a8hnt56a9aqoeqfh4hkvoe.apps.googleusercontent.com";// replace it with your client id;
+
+
     let _cmbSymbols = $("#cmbSymbols");
     let _table = $("#tableData tbody");
-    _cmbSymbols.prop("selectedIndex", "0");
+    let _signInIco=$("#signInIco");
+    let _cmbSector = $("#cmbSector").prop("selectedIndex", "-1");
+    let chartCreate;
 
-    let _chartTypeCmb = $("#chartStyleList").prop("selectedIndex", "0");
-    let ctx;
+    _cmbSymbols.prop("selectedIndex", "-1");
+    $(".chartTitle").hide();
+
 
     //RICERCA TRAMITE COMBOBOX
     _cmbSymbols.on("change", function () {
@@ -29,15 +34,16 @@ $(document).ready(function () {
             _table.html("");
             getSymbolSearched($(this).val(), _table);
         }
-    })
+    });
 
     //CHART
-    _chartTypeCmb.on("change", function () {
-        let ds = InviaRichiesta("GET", "http://localhost:3000/SECTOR");
-        ds.done(function (data) {
-            if (!ctx)
-                ctx = chartCreation("http://localhost:3000/chart");
-            chartMod(ctx, data[_chartTypeCmb.val()]);
+    _cmbSector.on("change", function () {
+        $(".chartTitle").fadeIn(1000);
+        let rq = InviaRichiesta("GET", "http://localhost:3000/SECTOR");
+        rq.done(function (data) {
+            if (!chartCreate)
+                chartCreate = chartCreation("http://localhost:3000/chart");
+            chartChangeValues(chartCreate, data[_cmbSector.val()]);
         });
     });
 
@@ -51,7 +57,67 @@ $(document).ready(function () {
         a.href = url_base64jp;
     });
 
+    if(localStorage.getItem("accessToken")==null)
+    {
+        _signInIco.addClass("fas fa-sign-in-alt");
+        $("#signIn").prop("title", "Sign In");
+    }
+    else
+    {
+        _signInIco.removeClass("fas fa-sign-in");
+        _signInIco.addClass("fab fa-google-drive");
+        $("#signIn").prop("title", "You are already signed in");
+    }
+
+    //UPLOAD A FILE
+    if (code) {
+        let r_ = $.ajax({
+            //PROMISE PER RICHESTA AJAX
+            type: "POST",
+            url: "https://www.googleapis.com/oauth2/v4/token",
+            data: {
+                code: code,
+                redirect_uri: redirect_uri,
+                client_secret: client_secret,
+                client_id: client_id,
+                scope: scope,
+                grant_type: "authorization_code",
+            },
+            contentType: "application/x-www-form-urlencoded;charset=utf-8",
+            dataType: "json",
+            timeout: 5000,
+        });
+        r_.done(function (data) {
+            localStorage.setItem("accessToken", data.access_token);
+            localStorage.setItem("refreshToken", data.refreshToken);
+            localStorage.setItem("expires_in", data.expires_in);
+            window.history.pushState({}, document.title, "index.html");
+        });
+    }
+
+    $("#upload").on('click', function(){
+        if(localStorage.getItem("accessToken")==null)
+            signIn(client_id,redirect_uri,scope);
+
+        let file = dataURItoBlob(document.getElementById("myChart").toDataURL("image/jpg"));
+        let upload = new Upload(file);
+        upload.doUpload();
+    });
+
+    $("#signIn").on('click', function(){
+        if(localStorage.getItem("accessToken")==null)
+            signIn(client_id,redirect_uri,scope);
+    });
+
 });
+
+
+function signIn(client_id,redirect_uri,scope) {
+    let url = "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=" + redirect_uri + "&prompt=consent&response_type=code&client_id=" + client_id
+        + "&scope=" + scope + "&access_type=offline";
+    // this line makes the user redirected to the url
+    window.open(url);
+}
 
 function getGlobalQuotes(symbol,i) {
     let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey="+apiKey;
@@ -105,21 +171,22 @@ function chartCreation(dataChart){
     return new Chart($("#myChart"),JSON.parse(_data.responseText));
 }
 
-function chartMod(chart, content)
+function chartChangeValues(chart, values)
 {
     let dataChart=chart["data"];
     dataChart["labels"]=[];
     let dataset=dataChart["datasets"][0];
     dataset["data"]=[];
-    for (let key in content)
+    for (let key in values)
     {
         dataChart["labels"].push(key);
-        dataset["data"].push(content[key].replace("%", ""));
+        dataset["data"].push(values[key].replace("%", ""));
         let color = "rgba(" + Random(0, 255) + ", " + Random(0, 255) + ", " + Random(0, 255) + ", 1)";
         dataset["backgroundColor"].push(color);
         dataset["borderColor"].push(color);
     }
     chart.update();
+
 }
 
 
@@ -138,32 +205,6 @@ function InviaRichiesta(method, url, parameters = "",async=true)
 
 function Random(min, max) {
     return Math.floor((max - min + 1) * Math.random()) + min; }
-
-$.ajax({
-    type: 'POST',
-    url: "https://www.googleapis.com/oauth2/v4/token",
-    data: {
-        code:code,
-        redirect_uri:redirectUri,
-        client_secret:clientSecret,
-        client_id:clientID,
-        scope:pointTO,
-        grant_type:"authorization_code"
-    },
-    dataType: "json",
-    success: function(resultData)
-    {
-        localStorage.setItem("accessToken",resultData.access_token);
-        localStorage.setItem("refreshToken",resultData.refreshToken);
-        localStorage.setItem("expires_in",resultData.expires_in);
-        window.history.pushState({}, document.title, "/GitLoginApp/" + "login.html");
-    }
-});
-
-function stripQueryStringAndHashFromPath(URL)
-{
-    return URL.split("?")[0].split("#")[0];
-}
 
 let Upload = function (file)
 {
@@ -190,6 +231,7 @@ Upload.prototype.doUpload = function ()
     let that = this;
     let formData = new FormData();
 
+    // add assoc key values, this will be posts values
     formData.append("file", this.file, this.getName());
     formData.append("upload_file", true);
 
@@ -201,18 +243,17 @@ Upload.prototype.doUpload = function ()
         },
         url: "https://www.googleapis.com/upload/drive/v2/files",
         data:{
-            uploadType:"media"},
-
+            uploadType:"media"
+        },
         xhr: function () {
             let myXhr = $.ajaxSettings.xhr();
-            if (myXhr.upload) {
+            /*if (myXhr.upload) {
                 myXhr.upload.addEventListener('progress', that.progressHandling, false);
-            }
+            }*/
             return myXhr;
         },
         success: function (data) {
             console.log(data);
-            window.location.href="http://127.0.0.1:8080";
         },
         error: function (error) {
             console.log(error);
@@ -226,22 +267,28 @@ Upload.prototype.doUpload = function ()
     });
 };
 
-Upload.prototype.progressHandling = function (event)
-{
-    let percent = 0;
-    let position = event.loaded || event.position;
-    let total = event.total;
-    let progress_bar_id = "#progress-wrp";
-    if (event.lengthComputable)
-        percent = Math.ceil(position / total * 100);
+function dataURItoBlob(dataURI) {
+    // convert base64 to raw binary data held in a string
+    // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+    let byteString = atob(dataURI.split(',')[1]);
 
-    $(progress_bar_id + " .progress-bar").css("width", +percent + "%");
-    $(progress_bar_id + " .status").text(percent + "%");
-};
+    // separate out the mime component
+    let mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
 
-$("#upload").on("click", function (e)
-{
-    let file = $("#files")[0].files[0];
-    let upload = new Upload(file);
-    upload.doUpload();
-});
+    // write the bytes of the string to an ArrayBuffer
+    let ab = new ArrayBuffer(byteString.length);
+
+    // create a view into the buffer
+    let ia = new Uint8Array(ab);
+
+    // set the bytes of the buffer to the correct values
+    for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    // write the ArrayBuffer to a blob, and you're done
+    let blob = new Blob([ab], {type: mimeString});
+    blob.name="ChartImage.jpg";
+    //DriveApp.createFile(blob);
+    return blob;
+}

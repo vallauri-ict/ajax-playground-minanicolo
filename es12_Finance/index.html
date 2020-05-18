@@ -8,11 +8,34 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="index.js"></script>
 </head>
 
-<body>
-<div style="font-size: 50pt; color: red; text-align: center">ALPHA VANTAGE</div>
+<script>
+    function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+    }
+
+    function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+    }
+</script>
+
+
+<body style="background-color: #2f4353;
+    background-image: linear-gradient(315deg, #2f4353 0%, #d2ccc4 74%);">
+<div style="font-size: 40pt; text-align: center">ALPHA VANTAGE</div>
+<div>
+    <button class="w3-button w3-xlarge" onclick="w3_open()">☰</button>
+</div>
+
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
+    <button onclick="w3_close()" class="w3-bar-item w3-large">&times;</button>
+    <a id="signIn" class="btn btn-default align-center bg-flat-color-1" style="background-color: #CCC">
+        <i id="signInIco" class="fas fa-sign-in"></i>
+    </a>
+</div>
 
         <!--        NAVBAR      -->
 <section class="section">
@@ -45,7 +68,7 @@
                 <span style="font-size: 15pt">Select a sector</span>
             </div>
             <div class="input-group ">
-                <select select class="form-control" id="chartStyleList" style="margin-bottom: 20px">
+                <select class="form-control" id="cmbSector" style="margin-bottom: 20px">
                     <option>Rank A: Real-Time Performance</option>
                     <option>Rank B: 1 Day Performance</option>
                     <option>Rank C: 5 Day Performance</option>
@@ -93,8 +116,9 @@
     </table>
 
 	<br><br><br><br><br><br>
+
 					<!-- GRAFICO -->
-    <div style="font-size: 25pt; color: #666; text-align: center">CHART</div>
+    <div style="font-size: 25pt; color: #666; text-align: center" class="chartTitle">CHART</div>
             <div class="container" style="width:600px;">
                 <canvas id="myChart"></canvas>
             </div>
@@ -103,34 +127,29 @@
         <div class="col-sm-12 row justify-content-center">
             <div class="col-sm-4" style="margin-bottom: 30px; margin-top: 15px">
                 <div class="text-center simple-text">
-                    <span>Download chart</span>
+                    <span style="font-size: 15pt; color:black;">Download chart</span>
                 </div>
                 <a id="download"
                    download="ChartImage.png"
                    href=""
-                   class="btn btn-secondary bg-flat-color-1 col-sm-12"
-                   title="Download chart">
+                   class="btn btn-secondary bg-flat-color-1 col-sm-12">
                     DOWNLOAD CHART
-                    <!-- Download Icon -->
-                    <i class="fa fa-download"></i>
                 </a>
             </div>
 
             <div class="col-sm-4" style="margin-bottom: 30px; margin-top: 15px">
                 <div class="text-center simple-text">
-                    <span>Upload a file on Google Drive</span>
+                    <span style="font-size: 15pt; color:black;">Upload a file on Google Drive</span>
                 </div>
                 <form id="myForm">
-                    <input type="submit" class="btn btn-secondary bg-flat-color-1 col-sm-12" value="Upload File" id="upload">
-                    <input type="file"  style="margin-top: 10px" name="files[]" multiple id="files">
-                    <div id="progress-wrp">
-                        <div class="progress-bar"></div>
-                        <div class="status">0%</div>
-                    </div>
+                    <input type="submit" class="btn btn-secondary bg-flat-color-1 col-sm-12" value="UPLOAD FILE" id="upload">
+                    <input type="file" style="margin-top: 10px" name="files[]" multiple id="files">
+                    <br>
                 </form>
             </div>
         </div>
     </div>
+
 </body>
 
 </html>
