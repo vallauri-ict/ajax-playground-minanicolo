@@ -9,7 +9,6 @@ const scope = "https://www.googleapis.com/auth/drive";
 let access_token= "https://oauth2.googleapis.com/token";
 let client_id = "615669052983-6nc3ff9he6a8hnt56a9aqoeqfh4hkvoe.apps.googleusercontent.com";// replace it with your client id;
 
-let _btnUpload=$("#uploadFile");
 
 $(document).ready(function () {
     let _cmbSymbols = $("#cmbSymbols");
