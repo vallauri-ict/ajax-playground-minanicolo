@@ -102,7 +102,11 @@ $(document).ready(function () {
             let upload = new Upload(file);
             upload.doUpload();
         }
-        else alert("You must sign in first");
+        else
+		{			
+			alert("You must sign in first");
+			return false;
+		}
     });
 
     $("#signIn").on("click", function(){
