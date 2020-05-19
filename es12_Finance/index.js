@@ -1,21 +1,23 @@
 "use strict";
 const apiKey="44FIKZA1TRY5GHVQ";
 
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const redirect_uri = "http://127.0.0.1:8080/index.html"; // replace with your redirect_uri;
+const client_secret = "1mxPnqrS06vDZ2dzGx1wMfvW"; // replace with your client secret
+const scope = "https://www.googleapis.com/auth/drive";
+let access_token= "https://oauth2.googleapis.com/token";
+let client_id = "615669052983-6nc3ff9he6a8hnt56a9aqoeqfh4hkvoe.apps.googleusercontent.com";// replace it with your client id;
+
+let _btnUpload=$("#uploadFile");
+
 $(document).ready(function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    const redirect_uri = "http://127.0.0.1:8080/index.html"; // replace with your redirect_uri;
-    const client_secret = "1mxPnqrS06vDZ2dzGx1wMfvW"; // replace with your client secret
-    const scope = "https://www.googleapis.com/auth/drive";
-    let access_token= "https://oauth2.googleapis.com/token";
-    let client_id = "615669052983-6nc3ff9he6a8hnt56a9aqoeqfh4hkvoe.apps.googleusercontent.com";// replace it with your client id;
-
-
     let _cmbSymbols = $("#cmbSymbols");
     let _table = $("#tableData tbody");
     let _signInIco=$("#signInIco");
     let _cmbSector = $("#cmbSector").prop("selectedIndex", "-1");
     let chartCreate;
+
 
     _cmbSymbols.prop("selectedIndex", "-1");
     $(".chartTitle").hide();
@@ -95,21 +97,22 @@ $(document).ready(function () {
         });
     }
 
-    $("#upload").on('click', function(){
-        if(localStorage.getItem("accessToken")==null)
-            signIn(client_id,redirect_uri,scope);
-
-        let file = dataURItoBlob(document.getElementById("myChart").toDataURL("image/jpg"));
-        let upload = new Upload(file);
-        upload.doUpload();
+    $("#uploadFile").on("click", function(){
+        if(localStorage.getItem("accessToken")!=null) {
+            let file = $("#file")[0].files[0];
+            let upload = new Upload(file);
+            upload.doUpload();
+        }
+        else alert("You must sign in first");
     });
 
-    $("#signIn").on('click', function(){
+    $("#signIn").on("click", function(){
         if(localStorage.getItem("accessToken")==null)
             signIn(client_id,redirect_uri,scope);
     });
 
 });
+
 
 
 function signIn(client_id,redirect_uri,scope) {
@@ -266,29 +269,3 @@ Upload.prototype.doUpload = function ()
         timeout: 60000
     });
 };
-
-function dataURItoBlob(dataURI) {
-    // convert base64 to raw binary data held in a string
-    // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
-    let byteString = atob(dataURI.split(',')[1]);
-
-    // separate out the mime component
-    let mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
-
-    // write the bytes of the string to an ArrayBuffer
-    let ab = new ArrayBuffer(byteString.length);
-
-    // create a view into the buffer
-    let ia = new Uint8Array(ab);
-
-    // set the bytes of the buffer to the correct values
-    for (let i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-
-    // write the ArrayBuffer to a blob, and you're done
-    let blob = new Blob([ab], {type: mimeString});
-    blob.name="ChartImage.jpg";
-    //DriveApp.createFile(blob);
-    return blob;
-}
