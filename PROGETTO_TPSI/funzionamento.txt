@@ -1,0 +1,29 @@
+PROGETTO TPSIT -- MINA NICOLÒ 4B INFORMATICA
+
+All'avvio verrà presentato uno shop con articoli di genere maschile e femminile in modo random.
+
+NAVBAR:
+ -Home: torna alla schermata principale;
+ -Man: visualizza gli articoli da uomo;
+ -Women: visualizza gli articoli da donna;
+ -Cart shop: cliccandoci sopra si aprirà il carrello con eventuali 	     articoli aggiunti.
+ -sidebar: cliccando si aprirà e ci saranno delle semplici informazioni   su chi ha realizzato il sito.
+
+ARTICOLI PRESENTI SULLA PAGINA:
+ -cliccando su un qualsiasi prodotto verranno visualizzate le     caratteristiche di quel prodotto specifico e tramite un pulsante lo si    potrà aggiungere al carrello.
+  IMPORTANTE!! Quando si ha le caratteristiche di un articolo aperte non   si possono visualizzare le caratteristiche degli altri articoli. Per    uscire dalla schermata delle caratteristiche si dovrà fare doppio click   sulla schermata medesima. (Eventuali aiuti e informazioni di entrata e    uscita da tale schermata è possile vederli da un'icona I nell'angolo in   alto a sinistra).
+
+CARRELLO:
+ -Cliccando sul carrello si potranno vedere eventuali prodotti aggiunti.
+ -Remove: rimuove quel prodotto specifico.
+ -Clear: rimuove tutti i prodotti presenti nel carrello.
+ -Check out: facendo click su tale pulsante si aprirà una schermata di              pagamento.
+
+SCHERMATA DI PAGAMENTO:
+ -Bisognerà inserire l'indirizzo e-mail, l'indirizzo del luogo della     spedizione e il metodo di pagamento.
+  Una volta che tutti i campi saranno completati correttamente si dovrà   cliccare sul pulsante PLACE ORDER, il quale aprirà una pagina dei     ringraziamenti. I dati inseriti nella pagina di pagamento saranno     salvati nella tabella "ordini".
+
+PAGINA DEI RINGRAZIAMENTI
+ -Verrà visualizzato un messaggio di ringraziamento.
+ -Nella navbar è presente il tasto home per tornare alla pagina di     shopping.
+ -Stelle di valutazione: è possibile esprimere un giudizio sul lavoro     cliccando sul numero di stelline che si preferisce. Il click su una     delle stelline farà si che l'utente ritorni alla pagina iniziale di     shopping.  

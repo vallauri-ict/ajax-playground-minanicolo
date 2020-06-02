@@ -1,0 +1,76 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> Mina's shop</title>
+		<meta name="description" content="Mina's shop">
+        <link rel="icon" href="img/nmlogo.jpg"/>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+        <link rel="stylesheet" href="index.css">
+
+	   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+
+        <script src="index.js"></script>
+        <script src="server/_libreria.php"></script>
+        <script src="libreria.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	</head>
+<body>
+   <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+         <div class="navbar-header">
+               <button type="button" class="navbar-toggle" data-toggle="collapse"
+                     data-target="#myNavbar">
+                  <span class="glyphicon glyphicon-menu-hamburger"></span>
+               </button>
+
+         <h1 class="brand brand-name navbar-left"><div class="navbar-left">Mina's shop</h1>
+         </div>
+         <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+               <ul class="nav navbar-nav">
+                  <li><a id="btnHome" href="index.html">Home</a></li>
+                  <li><a id="btnMan">Man</a></li>
+                  <li><a id="btnWomen">Women</a></li>
+                   <li>
+                       <a id="cart-popover" class="btn" data-placement="bottom"
+                          title="Shopping cart">
+                           <span class="glyphicon glyphicon-shopping-cart"></span>
+                           <span class="badge"></span>
+                           <span class="total_price">€ 0.00</span>
+                       </a>
+                   </li>
+                  <li><div id="mySidenav" class="sidenav">
+                      <a id="closeSidebar" >&times;</a>
+                      <span class="info">Project created by Mina Nicolò<br>4B Informatica
+                          <br>For more information write me at <p style="color: red">n.mina.1018@vallauri.edu</p></span>
+                  </div>
+                      <span style="font-size:30px;cursor:pointer" id="openSidebar">&nbsp; &#9776;</span></li>
+               </ul>
+         </div>
+      </div>
+   </nav>
+   <div id="popover-content-wrapper" style="display: none; width:300px">
+        <span id="cart_details"></span>
+       <div align="right">
+           <button class="btn btn-primary" id="check_out_cart">
+            <span class="glyphicon glyphicon-shopping-car"></span>
+               Check out
+           </button>
+           <a href="#" class="btn btn-default" id="clear_cart">
+               <span class="glyphicon glyphicon-trash"></span>
+               Clear
+           </a>
+       </div>
+   </div>
+    <div id="divItems">
+
+    </div>
+</body>
+</html>

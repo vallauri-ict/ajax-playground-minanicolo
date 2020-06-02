@@ -1,0 +1,77 @@
+
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pagamento</title>
+    <link rel="icon" href="img/nmlogo.jpg"/>
+    <!--Made with love by Mutiullah Samim -->
+
+    <!--Bootsrap 4 CDN-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!--Custom styles-->
+    <link rel="stylesheet" type="text/css" href="registrazione.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="registrazione.js"></script>
+    <script src="libreria.js"></script>
+</head>
+<body>
+<div class="container-login100" style="background-color: #f6fba2;
+    background-image: linear-gradient(315deg, #f6fba2 0%, #20ded3 74%);">
+    <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30" id="wrapper">
+        <form class="login100-form validate-form">
+				<span class="login100-form-title p-b-37" style="margin-top: 20px">
+					Complete your order!
+				</span>
+
+            <!-- EMAIL -->
+            <div class="form-group input-group">
+                <div class="wrap-input100 validate-input m-b-20" data-validate="Enter e-mail">
+                    <input class="input100" type="text" name="email" id="email" placeholder="e-mail" style="color:#0cbaba;">
+                    <span class="focus-input100"></span>
+                </div>
+            </div>
+
+            <!-- ADDRESS -->
+            <div class="wrap-input100 validate-input m-b-20" data-validate = "Enter address">
+                <input class="input100" type="text" name="address" placeholder="address" id="adr">
+                <span class="focus-input100"></span>
+            </div>
+
+            <!-- PAYMENT -->
+            <div class="input100" style="padding-top: 16px">
+                <div class="input-group">
+                    <select class="form-control" id="cmbPayment">
+                        <option value="null">-- Select Payment Mode --</option>
+                        <option value="PayPal">PayPal</option>
+                        <option value="Net Banking">Net Banking</option>
+                        <option value="Credit Card">Credit Card</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- MESSAGGIO DI ERRORE -->
+            <div class="alert alert-danger alert-dismissible" id="lblError">
+                <button type="button" class="close" >&times;</button>
+                <strong>Attenzione!</strong> Username, Password o metodo di pagamento non validi
+            </div>
+
+
+            <div class="container-login100-form-btn">
+                <button type="button" class="login100-form-btn"
+                        id="btnPay">	Place Order
+                </button>
+            </div>
+        </form>
+
+
+    </div>
+</div>
+</body>
+</html>
