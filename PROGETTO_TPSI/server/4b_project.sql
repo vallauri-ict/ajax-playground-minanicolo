@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 02, 2020 alle 20:20
+-- Creato il: Giu 03, 2020 alle 12:38
 -- Versione del server: 10.4.11-MariaDB
 -- Versione PHP: 7.4.1
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `4b_project`
 --
+CREATE DATABASE IF NOT EXISTS `4b_project` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `4b_project`;
 
 -- --------------------------------------------------------
 
